@@ -55,6 +55,10 @@ jobs:
       pages: write      # to deploy to Pages
       id-token: write   # to verify the deployment originates from an appropriate source
 
+    environment:
+      name: github-pages
+      url: codom.github.io
+
     runs-on: ubuntu-latest
 
     steps:
