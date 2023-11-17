@@ -32,7 +32,7 @@ jobs:
         python-version: '3.11'
         cache: 'pip'
     - name: Install latex
-      run: sudo apt-get install -y texlive-generic-extra
+      run: sudo apt-get install -y texlive-full
     - run: pip install -r requirements.txt
     - run: npm ci
     - run: npm run build --if-present
