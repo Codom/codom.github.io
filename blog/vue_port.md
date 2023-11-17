@@ -323,4 +323,6 @@ the future.
 
 # Deploying
 
-This whole project was developed in a brand-new repository. To deploy,
+This whole project was developed in a brand-new repository. To
+deploy the site, I need to configure a github action to build the project
+and host it on github pages.
