@@ -1,0 +1,259 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Developer CV
+% LaTeX Template
+% Version 1.0 (28/1/19)
+%
+% This template originates from:
+% http://www.LaTeXTemplates.com
+%
+% Authors:
+% Jan Vorisek (jan@vorisek.me)
+% Based on a template by Jan Küster (info@jankuester.com)
+% Modified for LaTeX Templates by Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% The MIT License (see included LICENSE file)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[9pt]{developercv} % Default font size, values from 8-12pt are recommended
+\usepackage{multicol}
+\usepackage{enumitem}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	TITLE AND CONTACT INFORMATION
+%----------------------------------------------------------------------------------------
+
+\begin{minipage}[t]{0.45\textwidth} % 45% of the page width for name
+	\vspace{-\baselineskip} % Required for vertically aligning minipages
+
+	% If your name is very short, use just one of the lines below
+	% If your name is very long, reduce the font size or make the minipage wider and reduce the others proportionately
+	\colorbox{black}{{\HUGE\textcolor{white}{\textbf{\MakeUppercase{Christopher}}}}} % First name
+	
+	\colorbox{black}{{\HUGE\textcolor{white}{\textbf{\MakeUppercase{Odom}}}}} % Last name
+	
+	\vspace{6pt}
+	
+	{\huge Software Engineer} % Career or current job title
+\end{minipage}
+\begin{minipage}[t]{0.23\textwidth} % 27.5% of the page width for the first row of icons
+	\vspace{-\baselineskip} % Required for vertically aligning minipages
+
+	% The first parameter is the FontAwesome icon name, the second is the box size and the third is the text
+	% Other icons can be found by referring to fontawesome.pdf (supplied with the template) and using the word after \fa in the command for the icon you want
+    \icon{MapMarker}{10}{Greater Boston, US}\vspace{-0.70em}\\
+    \-\hspace{2.5em}\footnotesize{willing to relocate}\vspace{-0.16em}\\
+	\icon{Phone}{10}{781 475 3804}\\
+	\icon{Globe}{10}{\href{https://codom.github.io}{codom.github.io}}\\
+\end{minipage}
+\begin{minipage}[t]{0.28\textwidth} % 27.5% of the page width for the second row of icons
+	\vspace{-\baselineskip} % Required for vertically aligning minipages
+	
+	% The first parameter is the FontAwesome icon name, the second is the box size and the third is the text
+	% Other icons can be found by referring to fontawesome.pdf (supplied with the template) and using the word after \fa in the command for the icon you want
+	\icon{At}{10}{\href{mailto:christopher.r.odom@gmail.com}{christopher.r.odom@gmail.com}}\\	
+	\icon{Github}{10}{\href{https://github.com/codom}{github.com/codom}}\\
+	\icon{Linkedin}{10}{\href{https://www.linkedin.com/in/christopher-r-odom/}{linkedin.com/christopher-r-odom}}\\
+\end{minipage}
+
+\vspace{0.5cm}
+
+%----------------------------------------------------------------------------------------
+%	INTRODUCTION, SKILLS AND TECHNOLOGIES
+%----------------------------------------------------------------------------------------
+
+%% \cvsect{Introduction/Skills}
+%% 
+%% \begin{minipage}[t]{0.4\textwidth} % 40% of the page width for the introduction text
+%% 	\vspace{-\baselineskip} % Required for vertically aligning minipages
+%% 
+%%     I am an aspiring software developer with a wide variety of intern experience
+%%     and non-professional practice. I am coming out of an experience gap, but strive
+%%     to meet and exceed previous successes.
+%% \end{minipage}
+%% \hfill % Whitespace between
+%% \begin{minipage}[t]{0.5\textwidth} % 50% of the page for the skills bar chart
+%% 	\vspace{-\baselineskip} % Required for vertically aligning minipages
+%% 	\begin{barchart}{5.5}
+%% 		\baritem{Python}{100}
+%% 		\baritem{C}{85}
+%% 		\baritem{Git}{80}
+%% 		\baritem{Linux}{75}
+%% 	\end{barchart}
+%% \end{minipage}
+
+\cvsect{Work Experience}
+
+\begin{entrylist}
+	\entry
+		{2020}
+		{Software Engineer}
+		{Red Hat}
+		{Assisted in web API upgrades to the Ceph Dashboard\\
+        \texttt{Python}\slashsep\texttt{CherryPy}}
+	\entry
+		{2018 -- 2019}
+		{Software Engineer}
+		{Draper}
+		{Aided in guidance and navigation flight software development by creating
+        tools for hardware and software engineers to test various software and
+        hardware components to comply with strict CRS2 contract requirements (For ISS Resupply)\\
+        \texttt{C}\slashsep\texttt{VxWorks}\slashsep\texttt{Python}\slashsep\texttt{Sockets}}
+	\entry
+		{2018 -- 2019\\\footnotesize{part time w/ classes}}
+		{Lab tech}
+        {ECG Lab, Umass Lowell}
+		{Aided in CS education research by maintaining and upgrading systems in use at the ECG lab,
+        including the iSense web service and its associated AppInventor plugin\\
+        \texttt{Ruby on Rails}\slashsep\texttt{Linux}\slashsep\texttt{AWS}\slashsep\texttt{Java (Android)}}
+\end{entrylist}
+
+\cvsect{OSS Contributions}
+
+\begin{entrylist}
+	\entry
+	{2023}
+	{Raylib}
+    {}
+    {
+        Using the UB sanitizer in LLVM, detected and mitigated reliance on undefined behavior in raylib's
+        rlgl layer.
+	    \\
+	    \texttt{C}\slashsep\texttt{LLVM}
+    }
+
+	\entry
+		{2019 -- 2020}
+		{Fedora on Raspberry Pi}
+        {}
+        {
+	Built a classroom-ready Fedora base install that could be used on the Raspberry Pi by students
+	\begin{itemize}\itemsep=0em
+		\item Bootstrapped Fedora Minimal into a useful dev environment using scripts
+		\item Researched Fedora Remix image generation
+	\end{itemize}
+	\texttt{C}\slashsep\texttt{Shell Scripting}\slashsep\texttt{Linux Userspace}}
+
+\end{entrylist}
+
+\cvsect{Personal Projects}
+
+\begin{entrylist}
+	\entry
+	{2023}
+	{RPG Dialogue System}
+    {}
+	{
+		Designed and implemented a branching dialogue interpreter library for a
+		for an unreleased RPG. The library parses
+		text files and emits a fully featured dialogue tree with mechanisms
+		to install triggers for game events. This project
+		loosely follows the
+		{\bf\href{https://craftinginterpreters.com/}{Crafting Interpreters}}
+		book, thus it resembles an {\bf interpreted programming language}.
+		\\
+		\texttt{Zig}\slashsep\texttt{Interpreter and Lang design}
+	}
+
+	\entry
+	{2023}
+	{\href{https://chrisodom.org/}{Personal Website}}
+    {\href{https://github.com/Codom/codom.github.io}{https://github.com/Codom/codom.github.io}}
+    {
+        Custom static website generator built on top of python-markdown and using three.js for modern
+	    graphics.
+	    \\
+	    \texttt{Python}\slashsep\texttt{Js}\slashsep\texttt{GLSL}
+    }
+
+	\entry
+	{2023}
+	{Notes Server}
+    {}
+    {
+        Using Python, orchestrated a web server to interactively serve markdown rendered to
+        HTML to the user while keeping track of to-do items.
+	    \\
+	    \texttt{Python}
+    }
+
+	\entry
+	{2023}
+    {CLAP Plugin}
+    {\href{https://github.com/Codom/SimpleGuitarAmp}{https://github.com/Codom/SimpleGuitarAmp}}
+    {
+        Using a mix of Zig, C, and test libraries written in Rust, created a generic guitar
+        amp simulation using a combination of cubic nonlinear distortion and filter equations.
+        \\
+        \texttt{Zig}\slashsep\texttt{C}\slashsep\texttt{Rust}
+    }
+
+\end{entrylist}
+
+% 	\entry
+% 		{2019 -- 2020}
+% 		{CCDC}
+%         {}
+%         {Worked in a fast-paced environment to propel our school's CCDC team into
+% 	the NECCDC regional\\
+%         \texttt{Shell Scripting}\slashsep\texttt{Linux Defensive SecOps}}
+% \end{entrylist}
+
+%----------------------------------------------------------------------------------------
+%	EDUCATION
+%----------------------------------------------------------------------------------------
+
+% \cvsect{Education}
+% 
+% \begin{entrylist}
+% 	\entry
+% 		{2017 -- 2021}
+% 		{Coursework in Computer Science}
+% 		{UMass Lowell}
+% 		{
+% 		Completed graduate coursework in OS, undergrad courses dealing with Architecture, ASM, Algorithms, etc.
+% 		and completed projects related to vm and language development.
+% 		}
+% \end{entrylist}
+% 
+% \vspace{8mm}
+
+% \cvsect{Skills}
+% 
+% \vspace{-21.75mm}
+% \parbox[t]{0.175\textwidth}{% 17.5% of the text width of the page
+% 	\ 
+% }%
+% \parbox[t]{0.825\textwidth}{% 82.5% of the text width of the page
+% \begin{multicols}{4}
+% \begin{itemize}[leftmargin=*]
+% 	\setlength\itemsep{-0.2em}
+% 	\item[\bf\#] C/C++
+% 	\item[\bf\#] GDB
+% 	\item[\bf\#] Tracy
+% 	\item[\bf\#] Web sockets
+% 	\item[\bf\#] Python
+% 	\item[\bf\#] Linux
+% 	\item[\bf\#] CLI
+% 	\item[\bf\#] Java
+% 	\item[\bf\#] Bash Scripting
+% 	\item[\bf\#] GLSL
+% 	\item[\bf\#] three.js
+% 	\item[\bf\#] Vulkan
+% 	\item[\bf\#] JS
+% 	\item[\bf\#] Technical communication
+% 	\item[\bf\#] Fast learner
+% \end{itemize}
+% \end{multicols}
+% }
+
+\end{document}
