@@ -1,12 +1,15 @@
 # Vue port
 
-I have spent the past few days porting my website into vue. I've done this
+I have spent the past few days porting my website into Vue. I've done this
 to try and understand a modern web development framework instead of some system
 I've duct-taped and zip-tied together in Python.
 
+I write this blog simply to document my learning process. There may be some errors,
+things may be outdated, etc, so keep that in mind going forward.
+
 At the moment, the site doesn't differ much from the default scaffold that vue
 provides. This is because I'm not a designer, and don't pretend to be. However, 
-I do think some things can be done in order to shape this site to more closely
+I do think some things can be done to shape this site to more closely
 match the style I had previously.
 
 ## Porting three.js
@@ -325,4 +328,25 @@ the future.
 
 This whole project was developed in a brand-new repository. To
 deploy the site, I need to configure a github action to build the project
-and host it on github pages.
+and host it on github pages. This action can be
+[viewed on the repo](https://raw.githubusercontent.com/Codom/codom.github.io/master/.github/workflows/node.js.yml).
+The gist of it is as follows:
+
+- Setup node.js
+- Setup Python
+  - This required a `requirements.txt` for pip
+- Install vue, vite, etc.
+- Install latex for the resume builder
+- Build
+- Upload to Github Pages
+
+And in a separate deploy task we then run deploy-pages. Once I validated this worked,
+I then had to change the name from new_codom.github.io to codom.github.io
+since pages would deploy the previous name to a non-root directory.
+
+And that's pretty much it! In a few days, I completely revamped my website.
+This isn't everything that I have planned, but I thought I should write
+this blog to document my learning process. I had no real experience with
+Vue and SPA frameworks generally, and this is likely only scratching the surface.
+However, this project taught me a lot about how the modern web functions,
+and I feel as if this knowledge will prove useful in the future.
