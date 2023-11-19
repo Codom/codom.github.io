@@ -33,7 +33,7 @@ def main():
         if os.path.isfile(file) and file[-3:] == ".md":
             process_markdown(file)
         if os.path.isfile(file) and file[-4:] == ".png":
-            subprocess.run(["mv", file, "./public/" ])
+            subprocess.run(["cp", file, "./public/" ])
 
 def process_markdown(page: str):
     with open(f"{page}", "r", encoding="utf-8") as in_file:
