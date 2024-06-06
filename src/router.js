@@ -5,10 +5,12 @@
  * Distributed under terms of the MIT license.
  */
 
+// router.js
 import { createRouter, createWebHistory } from 'vue-router';
 import About from './components/TheWelcome.vue';
 import Blog  from './components/BlogIndex.vue';
-import BlogViewer from './blog/BlogViewer.vue'
+import BlogViewer from './blog/BlogViewer.vue';
+import { animateRouteChange } from './assets/animations.js';
 
 const routes = [
     {
@@ -28,6 +30,10 @@ const routes = [
 const router = createRouter({
     history: createWebHistory(),
     routes,
+});
+
+router.afterEach((to, from) => {
+  animateRouteChange(to, from);
 });
 
 export default router;

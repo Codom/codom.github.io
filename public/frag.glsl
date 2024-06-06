@@ -1,11 +1,10 @@
 uniform vec2 u_resolution;
-uniform float u_time;
 uniform vec2 u_mouse;
+uniform float zoom;
+uniform vec2 p;
 
 void main() {
-	float zoom = 1.0 / (u_time + 25.0);
-	vec2 c = vec2(-1.4108866282582646, 0.0) + zoom
-		* (2.*gl_FragCoord.xy-u_resolution.xy)/u_resolution.y;
+    vec2 c = p + zoom * (2.*gl_FragCoord.xy-u_resolution.xy)/u_resolution.y;
 
 	vec2 z = c;
 

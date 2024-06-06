@@ -43,8 +43,9 @@ def process_markdown(page: str):
         markdown.markdown(text, extensions=['markdown.extensions.fenced_code']),
     ])
 
-    out_page = f"public/{page[:-3]}.html" # Get rid of .md and replace with .html
+    out_page = f"public/{page[2:-3]}.html" # Get rid of .md and replace with .html
     print(f"outputting to {out_page}")
+    os.makedirs('./public/blog/', exist_ok=True)
     with open(out_page, "w", encoding="utf-8") as out_file:
         out_file.write(html)
 
