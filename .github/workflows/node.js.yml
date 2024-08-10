@@ -32,7 +32,7 @@ jobs:
         python-version: '3.11'
         cache: 'pip'
     - name: Install latex
-      run: sudo apt-get install -y texlive-base texlive-fonts-recommended texlive-bibtex-extra
+      run: sudo apt-get install -y texlive-base texlive-extra texlive-fonts-recommended texlive-bibtex-extra
     - run: mkdir public/blog
     - run: pip install -r requirements.txt
     - run: npm install three
@@ -42,7 +42,6 @@ jobs:
     - run: npm install vite@^4.4.11
     - run: npm ci
     - run: npm run build --if-present
-    - run: mv public/resume.pdf dist/
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:
