@@ -29,3 +29,11 @@ coverage
 public/blog/
 public/*.png
 public/*.pdf
+
+resume/resume.aux
+resume/resume.fdb_latexmk
+resume/resume.fls
+resume/resume.pdf
+resume/resume.synctex.gz
+resume/texput.fls
+
