@@ -53,7 +53,7 @@ def process_resume():
     latex_env = os.environ | {"TEXINPUTS": ".:./resume:"}
     print(latex_env)
     print("Compiling resume...")
-    subprocess.run(["pdflatex", "resume/resume.tex"], env=latex_env)
+    subprocess.run(["pdflatex", "resume/resume.tex"], env=latex_env, check=True)
     subprocess.run(["mv", "resume.pdf", "public/"])
     subprocess.run(["rm", "resume.aux", "resume.log", "resume.out"])
     print("done")
