@@ -1,259 +1,369 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Developer CV
-% LaTeX Template
-% Version 1.0 (28/1/19)
-%
-% This template originates from:
-% http://www.LaTeXTemplates.com
-%
-% Authors:
-% Jan Vorisek (jan@vorisek.me)
-% Based on a template by Jan Küster (info@jankuester.com)
-% Modified for LaTeX Templates by Vel (vel@LaTeXTemplates.com)
-%
-% License:
-% The MIT License (see included LICENSE file)
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[10pt, letterpaper]{article}
 
-%----------------------------------------------------------------------------------------
-%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
-%----------------------------------------------------------------------------------------
+% Packages:
+\usepackage[
+    ignoreheadfoot, % set margins without considering header and footer
+    top=2 cm, % seperation between body and page edge from the top
+    bottom=2 cm, % seperation between body and page edge from the bottom
+    left=2 cm, % seperation between body and page edge from the left
+    right=2 cm, % seperation between body and page edge from the right
+    footskip=1.0 cm, % seperation between body and footer
+    % showframe % for debugging 
+]{geometry} % for adjusting page geometry
+\usepackage{titlesec} % for customizing section titles
+\usepackage{tabularx} % for making tables with fixed width columns
+\usepackage{array} % tabularx requires this
+\usepackage[dvipsnames]{xcolor} % for coloring text
+\definecolor{primaryColor}{RGB}{0, 0, 0} % define primary color
+\usepackage{enumitem} % for customizing lists
+\usepackage{fontawesome5} % for using icons
+\usepackage{amsmath} % for math
+\usepackage[
+    pdftitle={Christopher Odom's Resume},
+    pdfauthor={Christopher Odom},
+    pdfcreator={LaTeX with RenderCV},
+    colorlinks=true,
+    urlcolor=primaryColor
+]{hyperref} % for links, metadata and bookmarks
+\usepackage[pscoord]{eso-pic} % for floating text on the page
+\usepackage{calc} % for calculating lengths
+\usepackage{bookmark} % for bookmarks
+\usepackage{lastpage} % for getting the total number of pages
+\usepackage{changepage} % for one column entries (adjustwidth environment)
+\usepackage{paracol} % for two and three column entries
+\usepackage{ifthen} % for conditional statements
+\usepackage{needspace} % for avoiding page brake right after the section title
+\usepackage{iftex} % check if engine is pdflatex, xetex or luatex
 
-\documentclass[9pt]{developercv} % Default font size, values from 8-12pt are recommended
-\usepackage{multicol}
-\usepackage{enumitem}
+% Ensure that generate pdf is machine readable/ATS parsable:
+\ifPDFTeX
+    \input{glyphtounicode}
+    \pdfgentounicode=1
+    \usepackage[T1]{fontenc}
+    \usepackage[utf8]{inputenc}
+    \usepackage{lmodern}
+\fi
 
-%----------------------------------------------------------------------------------------
+\usepackage{charter}
+
+% Some settings:
+\raggedright
+\AtBeginEnvironment{adjustwidth}{\partopsep0pt} % remove space before adjustwidth environment
+\pagestyle{empty} % no header or footer
+\setcounter{secnumdepth}{0} % no section numbering
+\setlength{\parindent}{0pt} % no indentation
+\setlength{\topskip}{0pt} % no top skip
+\setlength{\columnsep}{0.15cm} % set column seperation
+\pagenumbering{gobble} % no page numbering
+
+\titleformat{\section}{\needspace{4\baselineskip}\bfseries\large}{}{0pt}{}[\vspace{1pt}\titlerule]
+
+\titlespacing{\section}{
+    % left space:
+    -1pt
+}{
+    % top space:
+    0.3 cm
+}{
+    % bottom space:
+    0.2 cm
+} % section title spacing
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\small$\bullet$}}$} % custom bullet points
+\newenvironment{highlights}{
+    \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0 cm + 10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights
+
+
+\newenvironment{highlightsforbulletentries}{
+    \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights for bullet entries
+
+\newenvironment{onecolentry}{
+    \begin{adjustwidth}{
+        0 cm + 0.00001 cm
+    }{
+        0 cm + 0.00001 cm
+    }
+}{
+    \end{adjustwidth}
+} % new environment for one column entries
+
+\newenvironment{twocolentry}[2][]{
+    \onecolentry
+    \def\secondColumn{#2}
+    \setcolumnwidth{\fill, 6.0 cm}
+    \begin{paracol}{2}
+}{
+    \switchcolumn \raggedleft \secondColumn
+    \end{paracol}
+    \endonecolentry
+} % new environment for two column entries
+
+\newenvironment{threecolentry}[3][]{
+    \onecolentry
+    \def\thirdColumn{#3}
+    \setcolumnwidth{, \fill, 4.5 cm}
+    \begin{paracol}{3}
+    {\raggedright #2} \switchcolumn
+}{
+    \switchcolumn \raggedleft \thirdColumn
+    \end{paracol}
+    \endonecolentry
+} % new environment for three column entries
+
+\newenvironment{header}{
+    \setlength{\topsep}{0pt}\par\kern\topsep\centering\linespread{1.5}
+}{
+    \par\kern\topsep
+} % new environment for the header
+
+\newcommand{\placelastupdatedtext}{% \placetextbox{<horizontal pos>}{<vertical pos>}{<stuff>}
+  \AddToShipoutPictureFG*{% Add <stuff> to current page foreground
+    \put(
+        \LenToUnit{\paperwidth-2 cm-0 cm+0.05cm},
+        \LenToUnit{\paperheight-1.0 cm}
+    ){\vtop{{\null}\makebox[0pt][c]{
+        \small\color{gray}\textit{Last updated in July 2024}\hspace{\widthof{Last updated in July 2024}}
+    }}}%
+  }%
+}%
+
+% save the original href command in a new command:
+\let\hrefWithoutArrow\href
+
+% new command for external links:
+
 
 \begin{document}
-
-%----------------------------------------------------------------------------------------
-%	TITLE AND CONTACT INFORMATION
-%----------------------------------------------------------------------------------------
-
-\begin{minipage}[t]{0.45\textwidth} % 45% of the page width for name
-	\vspace{-\baselineskip} % Required for vertically aligning minipages
-
-	% If your name is very short, use just one of the lines below
-	% If your name is very long, reduce the font size or make the minipage wider and reduce the others proportionately
-	\colorbox{black}{{\HUGE\textcolor{white}{\textbf{\MakeUppercase{Christopher}}}}} % First name
-	
-	\colorbox{black}{{\HUGE\textcolor{white}{\textbf{\MakeUppercase{Odom}}}}} % Last name
-	
-	\vspace{6pt}
-	
-	{\huge Software Engineer} % Career or current job title
-\end{minipage}
-\begin{minipage}[t]{0.23\textwidth} % 27.5% of the page width for the first row of icons
-	\vspace{-\baselineskip} % Required for vertically aligning minipages
-
-	% The first parameter is the FontAwesome icon name, the second is the box size and the third is the text
-	% Other icons can be found by referring to fontawesome.pdf (supplied with the template) and using the word after \fa in the command for the icon you want
-    \icon{MapMarker}{10}{Greater Boston, US}\vspace{-0.70em}\\
-    \-\hspace{2.5em}\footnotesize{willing to relocate}\vspace{-0.16em}\\
-	\icon{Phone}{10}{781 475 3804}\\
-	\icon{Globe}{10}{\href{https://codom.github.io}{codom.github.io}}\\
-\end{minipage}
-\begin{minipage}[t]{0.28\textwidth} % 27.5% of the page width for the second row of icons
-	\vspace{-\baselineskip} % Required for vertically aligning minipages
-	
-	% The first parameter is the FontAwesome icon name, the second is the box size and the third is the text
-	% Other icons can be found by referring to fontawesome.pdf (supplied with the template) and using the word after \fa in the command for the icon you want
-	\icon{At}{10}{\href{mailto:christopher.r.odom@gmail.com}{christopher.r.odom@gmail.com}}\\	
-	\icon{Github}{10}{\href{https://github.com/codom}{github.com/codom}}\\
-	\icon{Linkedin}{10}{\href{https://www.linkedin.com/in/christopher-r-odom/}{linkedin.com/christopher-r-odom}}\\
-\end{minipage}
-
-\vspace{0.5cm}
-
-%----------------------------------------------------------------------------------------
-%	INTRODUCTION, SKILLS AND TECHNOLOGIES
-%----------------------------------------------------------------------------------------
-
-%% \cvsect{Introduction/Skills}
-%% 
-%% \begin{minipage}[t]{0.4\textwidth} % 40% of the page width for the introduction text
-%% 	\vspace{-\baselineskip} % Required for vertically aligning minipages
-%% 
-%%     I am an aspiring software developer with a wide variety of intern experience
-%%     and non-professional practice. I am coming out of an experience gap, but strive
-%%     to meet and exceed previous successes.
-%% \end{minipage}
-%% \hfill % Whitespace between
-%% \begin{minipage}[t]{0.5\textwidth} % 50% of the page for the skills bar chart
-%% 	\vspace{-\baselineskip} % Required for vertically aligning minipages
-%% 	\begin{barchart}{5.5}
-%% 		\baritem{Python}{100}
-%% 		\baritem{C}{85}
-%% 		\baritem{Git}{80}
-%% 		\baritem{Linux}{75}
-%% 	\end{barchart}
-%% \end{minipage}
-
-\cvsect{Work Experience}
-
-\begin{entrylist}
-	\entry
-		{2020}
-		{Software Engineer}
-		{Red Hat}
-		{Assisted in web API upgrades to the Ceph Dashboard\\
-        \texttt{Python}\slashsep\texttt{CherryPy}}
-	\entry
-		{2018 -- 2019}
-		{Software Engineer}
-		{Draper}
-		{Aided in guidance and navigation flight software development by creating
-        tools for hardware and software engineers to test various software and
-        hardware components to comply with strict CRS2 contract requirements (For ISS Resupply)\\
-        \texttt{C}\slashsep\texttt{VxWorks}\slashsep\texttt{Python}\slashsep\texttt{Sockets}}
-	\entry
-		{2018 -- 2019\\\footnotesize{part time w/ classes}}
-		{Lab tech}
-        {ECG Lab, Umass Lowell}
-		{Aided in CS education research by maintaining and upgrading systems in use at the ECG lab,
-        including the iSense web service and its associated AppInventor plugin\\
-        \texttt{Ruby on Rails}\slashsep\texttt{Linux}\slashsep\texttt{AWS}\slashsep\texttt{Java (Android)}}
-\end{entrylist}
-
-\cvsect{OSS Contributions}
-
-\begin{entrylist}
-	\entry
-	{2023}
-	{Raylib}
-    {}
-    {
-        Using the UB sanitizer in LLVM, detected and mitigated reliance on undefined behavior in raylib's
-        rlgl layer.
-	    \\
-	    \texttt{C}\slashsep\texttt{LLVM}
+    \newcommand{\AND}{\unskip
+        \cleaders\copy\ANDbox\hskip\wd\ANDbox
+        \ignorespaces
     }
+    \newsavebox\ANDbox
+    \sbox\ANDbox{$|$}
 
-	\entry
-		{2019 -- 2020}
-		{Fedora on Raspberry Pi}
-        {}
-        {
-	Built a classroom-ready Fedora base install that could be used on the Raspberry Pi by students
-	\begin{itemize}\itemsep=0em
-		\item Bootstrapped Fedora Minimal into a useful dev environment using scripts
-		\item Researched Fedora Remix image generation
-	\end{itemize}
-	\texttt{C}\slashsep\texttt{Shell Scripting}\slashsep\texttt{Linux Userspace}}
+    \begin{header}
+        \fontsize{25 pt}{25 pt}\selectfont Christopher Odom
 
-\end{entrylist}
+        \vspace{5 pt}
 
-\cvsect{Personal Projects}
+        \normalsize
+        \mbox{Greater Boston, MA}%
+        \kern 5.0 pt%
+        \AND%
+        \kern 5.0 pt%
+        \mbox{\hrefWithoutArrow{mailto:christopher.r.odom@gmail.com}{christopher.r.odom@gmail.com}}%
+        \kern 5.0 pt%
+        \AND%
+        \kern 5.0 pt%
+        \mbox{\hrefWithoutArrow{tel:+781-475-3804}{781 475 3804}}%
+        \kern 5.0 pt%
+        \AND%
+        \kern 5.0 pt%
+        \mbox{\hrefWithoutArrow{https://codom.github.io/}{codom.github.io}}%
+        \kern 5.0 pt%
+        \AND%
+        \kern 5.0 pt%
+        \mbox{\hrefWithoutArrow{https://linkedin.com/in/christopher-r-odom}{linkedin.com/in/christopher-r-odom}}%
+        \kern 5.0 pt%
+        \AND%
+        \kern 5.0 pt%
+        \mbox{\hrefWithoutArrow{https://github.com/codom}{github.com/codom}}%
+    \end{header}
 
-\begin{entrylist}
-	\entry
-	{2023}
-	{RPG Dialogue System}
-    {}
-	{
-		Designed and implemented a branching dialogue interpreter library for a
-		for an unreleased RPG. The library parses
-		text files and emits a fully featured dialogue tree with mechanisms
-		to install triggers for game events. This project
-		loosely follows the
-		{\bf\href{https://craftinginterpreters.com/}{Crafting Interpreters}}
-		book, thus it resembles an {\bf interpreted programming language}.
-		\\
-		\texttt{Zig}\slashsep\texttt{Interpreter and Lang design}
-	}
+    \vspace{5 pt - 0.3 cm}
 
-	\entry
-	{2023}
-	{\href{https://chrisodom.org/}{Personal Website}}
-    {\href{https://github.com/Codom/codom.github.io}{https://github.com/Codom/codom.github.io}}
-    {
-		Using custom markdown tooling, vue.js components, and webgl graphics driven by three.js,
-		created a sleek and modern SPA Website that hosts my resume, blog, and other highlights.
-	    \\
-	    \texttt{Python}\slashsep\texttt{Js}\slashsep\texttt{GLSL}\slashsep\texttt{Vue.js}\slashsep\texttt{Node.js}
-    }
 
-	\entry
-	{2023}
-	{Notes Server}
-    {}
-    {
-        Using Python, orchestrated a web server to interactively serve markdown rendered to
-        HTML to the user while keeping track of to-do items.
-	    \\
-	    \texttt{Python}
-    }
+%    \section{Welcome To RenderCV!}
+%
+%
+%
+%        
+%        \begin{onecolentry}
+%            \href{https://github.com/sinaatalay/rendercv}{RenderCV} is a LaTeX-based CV/resume framework. It allows you to create a high-quality CV or resume as a PDF file from a YAML file, with \textbf{full Markdown syntax support} and \textbf{complete control over the LaTeX code}.
+%        \end{onecolentry}
+%
+%        \vspace{0.2 cm}
+%
+%        \begin{onecolentry}
+%            The boilerplate content is taken from \href{https://github.com/dnl-blkv/mcdowell-cv}{here}, where a \textit{clean and tidy CV} pattern is proposed by \textbf{\href{https://www.gayle.com/}{Gayle Laakmann McDowell}}.
+%        \end{onecolentry}
+%
+%
+%    
+%    \section{Quick Guide}
+%
+%    \begin{onecolentry}
+%        \begin{highlightsforbulletentries}
+%
+%
+%        \item Each section title is arbitrary, and each section contains a list of entries.
+%
+%        \item There are 7 unique entry types: \textit{BulletEntry}, \textit{TextEntry}, \textit{EducationEntry}, \textit{ExperienceEntry}, \textit{NormalEntry}, \textit{PublicationEntry}, and \textit{OneLineEntry}.
+%
+%        \item Select a section title, pick an entry type, and start writing your section!
+%
+%        \item \href{https://docs.rendercv.com/user_guide/}{Here}, you can find a comprehensive user guide for RenderCV.
+%
+%
+%        \end{highlightsforbulletentries}
+%    \end{onecolentry}
+    
+    \section{Experience}
 
-	\entry
-	{2023}
-    {CLAP Plugin}
-    {\href{https://github.com/Codom/SimpleGuitarAmp}{https://github.com/Codom/SimpleGuitarAmp}}
-    {
-        Using a mix of Zig, C, and test libraries written in Rust, created a generic guitar
-        amp simulation using a combination of cubic nonlinear distortion and filter equations.
-        \\
-        \texttt{Zig}\slashsep\texttt{C}\slashsep\texttt{Rust}
-    }
 
-\end{entrylist}
 
-% 	\entry
-% 		{2019 -- 2020}
-% 		{CCDC}
-%         {}
-%         {Worked in a fast-paced environment to propel our school's CCDC team into
-% 	the NECCDC regional\\
-%         \texttt{Shell Scripting}\slashsep\texttt{Linux Defensive SecOps}}
-% \end{entrylist}
+        
+        \begin{twocolentry}{
+            November 2023 – Present
+        }
+            \textbf{Data Labeler for Software} Data Annotation, Remote -- US\end{twocolentry}
 
-%----------------------------------------------------------------------------------------
-%	EDUCATION
-%----------------------------------------------------------------------------------------
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item Labelled datasets for coding and data-science workflows
+                \item Created various workflows to optimize deploying projects in React, Android, Python, and C++
+                \item Leveraged AI to build various file-hosting, music streaming, and blogging apps
+            \end{highlights}
+        \end{onecolentry}
 
-% \cvsect{Education}
-% 
-% \begin{entrylist}
-% 	\entry
-% 		{2017 -- 2021}
-% 		{Coursework in Computer Science}
-% 		{UMass Lowell}
-% 		{
-% 		Completed graduate coursework in OS, undergrad courses dealing with Architecture, ASM, Algorithms, etc.
-% 		and completed projects related to vm and language development.
-% 		}
-% \end{entrylist}
-% 
-% \vspace{8mm}
 
-% \cvsect{Skills}
-% 
-% \vspace{-21.75mm}
-% \parbox[t]{0.175\textwidth}{% 17.5% of the text width of the page
-% 	\ 
-% }%
-% \parbox[t]{0.825\textwidth}{% 82.5% of the text width of the page
-% \begin{multicols}{4}
-% \begin{itemize}[leftmargin=*]
-% 	\setlength\itemsep{-0.2em}
-% 	\item[\bf\#] C/C++
-% 	\item[\bf\#] GDB
-% 	\item[\bf\#] Tracy
-% 	\item[\bf\#] Web sockets
-% 	\item[\bf\#] Python
-% 	\item[\bf\#] Linux
-% 	\item[\bf\#] CLI
-% 	\item[\bf\#] Java
-% 	\item[\bf\#] Bash Scripting
-% 	\item[\bf\#] GLSL
-% 	\item[\bf\#] three.js
-% 	\item[\bf\#] Vulkan
-% 	\item[\bf\#] JS
-% 	\item[\bf\#] Technical communication
-% 	\item[\bf\#] Fast learner
-% \end{itemize}
-% \end{multicols}
-% }
+        \vspace{0.2 cm}
+
+        \begin{twocolentry}{
+            June 2020 – August 2020
+        }
+            \textbf{Software Engineering Intern}, Red Hat -- Westford, MA\end{twocolentry}
+
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item Implemented product improvements to Ceph Dashboard API
+            \end{highlights}
+        \end{onecolentry}
+
+
+        \vspace{0.2 cm}
+
+        \begin{twocolentry}{
+            June 2018 – Jan 2019
+        }
+            \textbf{Software Engineering Intern}, Draper -- Cambridge, MA\end{twocolentry}
+
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+              \item Designed and implemented a test-application framework for hardware based compliance testing on a CRS2 platform.
+              \item Learned to build custom ioctls to integrate special hardware tests to an offline data collection pipeline.
+              \item Created custom internal tooling to collect data and configure specialized tests.
+            \end{highlights}
+        \end{onecolentry}
+
+    
+    \section{Projects}
+
+        \begin{twocolentry}{
+            2023 - 2024 (Unpublished)
+        }
+            \textbf{2D Game Engine}\end{twocolentry}
+
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item Developing a 2D game engine built on top of Raylib that leverages several technologies to help create compelling narratives
+                \item Interactive event-based asset management using inotify on linux
+                \item Custom async requests library using a curl worker thread
+                \item Custom script language and data format for dialogue systems
+                \item Tools Used: Zig, C, Raylib, Curl, Gitea
+            \end{highlights}
+        \end{onecolentry}
+
+
+        \vspace{0.2 cm}
+
+        \begin{twocolentry}{
+            \href{https://github.com/codom/codom.github.io}{github.com/codom/codom.github.io}
+        }
+        \textbf{Personal Website}\end{twocolentry}
+
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+              \item Simple landing page I use to experiment with web development
+              \item Historically built using a makefile, now I use vue.js and related build tools
+              \item Tools used: vue.js, three.js, glsl, Python, Github Actions
+            \end{highlights}
+        \end{onecolentry}
+
+
+        \vspace{0.2 cm}
+
+        \begin{twocolentry}{
+            \href{https://github.com/Codom/SimpleGuitarAmp}{github.com/Codom/SimpleGuitarAmp}
+        }
+            \textbf{Guitar Amp Sim}\end{twocolentry}
+
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item Implemented filter algorithms in order to simulate a guitar amp
+                \item Packaged to support any DAW with CLAP support (ie, Bitwig)
+                \item Tools Used: Zig, C
+            \end{highlights}
+        \end{onecolentry}
+
+    \section{Additional Experience And Awards}
+
+        \begin{onecolentry}
+            \textbf{Caretaker (2021-2024):} Assisted family for end-of-life planning.
+        \end{onecolentry}
+
+        \vspace{0.2 cm}
+
+        \begin{onecolentry}
+            \textbf{CCDC (2020):} Participated in a competitive regional cybersecurity competition
+        \end{onecolentry}
+
+    \section{Technologies}
+        \begin{onecolentry}
+            \textbf{Languages:} C++, C, Java, SQL, JavaScript, Python, Zig
+        \end{onecolentry}
+
+        \vspace{0.2 cm}
+
+        \begin{onecolentry}
+            \textbf{Software:} Git, Github, Linux, Docker, Podman, LLVM
+        \end{onecolentry}
+
+    \section{Education}
+        \begin{twocolentry}{
+            Sept 2017 – May 2021 
+        }
+            \textbf{University of Massachusetts, Lowell}, BS in Computer Science\end{twocolentry}
+
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item \textbf{Coursework:} Computer Architecture, Operating Systems, Analysis of Algorithms, Foundations of CS
+            \end{highlights}
+        \end{onecolentry}
 
 \end{document}
