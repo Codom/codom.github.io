@@ -47,15 +47,5 @@ export default {
     },
 }
 </script>
-
 <style>
-@media (min-width: 1024px) {
-  .post {
-    overflow: auto;
-  }
-  img {
-    max-width: 100%;
-    height: auto;
-  } 
-}
 </style>
