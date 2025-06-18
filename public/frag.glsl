@@ -16,5 +16,6 @@ void main() {
 	}
 	ar = ar / i;
 
-	gl_FragColor = vec4(0.0, vec2(1.0 - (1. / ar)), ar / 2.0);
+  float color = 1.0 - (1. / ar);
+	gl_FragColor = vec4(0.0, color / 3.0, color, ar / 2.0);
 }
