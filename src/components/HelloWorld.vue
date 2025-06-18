@@ -14,7 +14,8 @@ defineProps({
         <p>Software Engineer</p>
         <router-link to="/">Home</router-link> |
         <router-link to="/Blog">Blog</router-link> |
-        <a href='/resume.pdf'>Resume</a>
+        <a href='/resume.pdf'>Resume</a> |
+        <a href='https://github.com/Codom'>Github</a>
     </h3>
   </div>
 </template>
@@ -37,15 +38,4 @@ h3 {
   text-align: center;
 }
 
-@media (min-width: 1024px) {
-  .greetings h1,
-  .greetings h3 {
-    text-align: left;
-  }
-  .greetings {
-    position: fixed;
-    top: 50%;
-    transform: translate(0, -50%);
-  }
-}
 </style>
