@@ -142,7 +142,16 @@ function render() {
 
 export function animateRouteChange(to, from) {
   lastKeyframe = targetKeyframe;
-  targetKeyframe = keyframes[to.path.toLowerCase()];
+  
+  const path = to.path.toLowerCase();
+  if (path in keyframes) {
+    targetKeyframe = keyframes[path];
+  } else if (path.startsWith('/blog/')) {
+    targetKeyframe = keyframes['/blog'];
+  } else {
+    targetKeyframe = keyframes['/'];
+  }
+
   const currentKeyframe = lastKeyframe;
 
   // Reset animation progress

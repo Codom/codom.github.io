@@ -14,7 +14,7 @@ defineProps({
         <p>Software Engineer</p>
         <nav>
             <router-link to="/">Home</router-link>
-            <router-link to="/blog">Blog</router-link>
+            <router-link to="/blog">Projects</router-link>
             <router-link to="/resume">Resume</router-link>
             <a href='https://github.com/Codom' target="_blank">Github</a>
         </nav>

@@ -34,7 +34,7 @@ export default {
   <div class="page-wrapper">
       <div class="paper-card">
           <WelcomeItem>
-            <template #heading>Blog</template>
+            <template #heading>Projects</template>
 
             <div v-if="loading">Loading posts...</div>
             <div v-if="error">Error: {{ error }}</div>
