@@ -87,13 +87,28 @@ def process_markdown(file_path: str):
     }
 
 def process_resume():
-    latex_env = os.environ | {"TEXINPUTS": ".:./resume:"}
-    print(latex_env)
     print("Compiling resume...")
-    subprocess.run(["pdflatex", "resume/resume.tex"], env=latex_env, check=True)
-    subprocess.run(["mv", "resume.pdf", "public/"])
-    subprocess.run(["rm", "resume.aux", "resume.log", "resume.out"])
-    print("done")
+    try:
+        with open("resume/master_resume_2025.md", "r", encoding="utf-8") as in_file:
+            text = in_file.read()
+        
+        # Strip YAML front matter if present
+        if text.startswith('---'):
+            try:
+                # Find the end of the front matter
+                _, _, rest = text.split('---', 2)
+                text = rest.strip()
+            except ValueError:
+                # If there isn't a second ---, just leave it as is or handle error
+                print("Warning: Malformed YAML front matter in resume.")
+        
+        html = markdown.markdown(text, extensions=['markdown.extensions.fenced_code'])
+        
+        with open("public/resume.html", "w", encoding="utf-8") as out_file:
+            out_file.write(html)
+        print("done")
+    except FileNotFoundError:
+        print("Error: resume/master_resume_2025.md not found.")
 
 if __name__ == "__main__":
     main()

@@ -31,22 +31,26 @@ export default {
 </script>
 
 <template>
-  <WelcomeItem>
-    <template #heading>Blog</template>
+  <div class="page-wrapper">
+      <div class="paper-card">
+          <WelcomeItem>
+            <template #heading>Blog</template>
 
-    <div v-if="loading">Loading posts...</div>
-    <div v-if="error">Error: {{ error }}</div>
-    
-    <div v-else>
-        <div v-for="post in posts" :key="post.id" class="blog-entry">
-            <h2>
-                <router-link :to="post.path">
-                    {{ post.title }} - {{ post.date }}
-                </router-link>
-            </h2>
-        </div>
-    </div>
-  </WelcomeItem>
+            <div v-if="loading">Loading posts...</div>
+            <div v-if="error">Error: {{ error }}</div>
+            
+            <div v-else>
+                <div v-for="post in posts" :key="post.id" class="blog-entry">
+                    <h2>
+                        <router-link :to="post.path">
+                            {{ post.title }} - {{ post.date }}
+                        </router-link>
+                    </h2>
+                </div>
+            </div>
+          </WelcomeItem>
+      </div>
+  </div>
 </template>
 
 <style scoped>

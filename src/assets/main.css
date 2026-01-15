@@ -21,3 +21,93 @@ a,
   }
 }
 
+/* Global Paper/Card Styling */
+.page-wrapper {
+    width: 100%;
+    /* min-height: 100vh;  Removed because main structure handles height */
+    display: flex;
+    justify-content: center;
+    /* padding: 2rem 1rem; Handled by #app padding mostly, but let's keep it safe */
+}
+
+.paper-card {
+    background: var(--color-background-soft);
+    color: var(--color-text);
+    padding: 3rem 4rem;
+    width: 100%;
+    max-width: 850px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    border-radius: 4px;
+}
+
+.loading, .error {
+    color: var(--color-text);
+    text-align: center;
+    margin-top: 2rem;
+}
+
+/* Global Markdown/Content Typography */
+.markdown-body h1 {
+    font-size: 2.5rem;
+    border-bottom: 2px solid var(--color-border);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-heading);
+}
+
+.markdown-body h2 {
+    font-size: 1.5rem;
+    color: var(--color-heading);
+    margin-top: 1.5rem;
+    margin-bottom: 0.8rem;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0.2rem;
+    text-transform: uppercase;
+}
+
+.markdown-body h3 {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: var(--color-heading);
+}
+
+.markdown-body p {
+    margin-bottom: 0.8rem;
+    line-height: 1.6;
+    color: var(--color-text);
+}
+
+.markdown-body ul {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+}
+
+.markdown-body li {
+    margin-bottom: 0.3rem;
+    line-height: 1.5;
+    color: var(--color-text);
+}
+
+.markdown-body a {
+    color: hsla(200, 100%, 37%, 1);
+    text-decoration: none;
+    transition: 0.4s;
+}
+
+.markdown-body a:hover {
+    background-color: hsla(200, 100%, 37%, 0.2);
+}
+
+@media (max-width: 600px) {
+    .paper-card {
+        padding: 2rem 1.5rem;
+    }
+    
+    .markdown-body h1 {
+        font-size: 2rem;
+    }
+}

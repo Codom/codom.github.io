@@ -97,10 +97,13 @@ const keyframes = {
     p: new THREE.Vector2(-1.25, 0.0)
   },
   '/blog': {
+    zoom: 1.0 / (100.0),
+    p: new THREE.Vector2(-1.618, 0.0)
+  },
+  '/resume': {
     zoom: 1.0 / (25.0),
     p: new THREE.Vector2(-1.4108866282582646, 0.0)
   }
-  // Add more keyframes for other endpoints...
 };
 
 // Current animation target
