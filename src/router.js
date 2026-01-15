@@ -10,6 +10,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import About from './components/TheWelcome.vue';
 import Blog  from './components/BlogIndex.vue';
 import BlogViewer from './blog/BlogViewer.vue';
+import ResumeView from './components/ResumeView.vue';
 import { animateRouteChange } from './assets/animations.js';
 
 const routes = [
@@ -24,6 +25,10 @@ const routes = [
     {
         path: '/blog/:id',
         component: BlogViewer,
+    },
+    {
+        path: '/resume',
+        component: ResumeView,
     }
 ]
 

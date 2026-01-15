@@ -1,16 +1,56 @@
 <script>
 import WelcomeItem from './WelcomeItem.vue'
+
+export default {
+  components: {
+    WelcomeItem
+  },
+  data() {
+    return {
+      posts: [],
+      loading: true,
+      error: null
+    }
+  },
+  mounted() {
+    fetch('/blog/index.json')
+      .then(response => {
+        if (!response.ok) throw new Error('Failed to load blog index')
+        return response.json()
+      })
+      .then(data => {
+        this.posts = data
+        this.loading = false
+      })
+      .catch(err => {
+        this.error = err.message
+        this.loading = false
+      })
+  }
+}
 </script>
 
 <template>
   <WelcomeItem>
     <template #heading>Blog</template>
 
-    <h2>
-        <router-link to="/blog/vue_port">
-            Porting site to vue - 11/16/2023
-        </router-link>
-    </h2>
-    <h2><router-link to="/blog/static_website">Overhaul of static website generation - 09/28/2022</router-link></h2>
+    <div v-if="loading">Loading posts...</div>
+    <div v-if="error">Error: {{ error }}</div>
+    
+    <div v-else>
+        <div v-for="post in posts" :key="post.id" class="blog-entry">
+            <h2>
+                <router-link :to="post.path">
+                    {{ post.title }} - {{ post.date }}
+                </router-link>
+            </h2>
+        </div>
+    </div>
   </WelcomeItem>
 </template>
+
+<style scoped>
+.blog-entry {
+    margin-bottom: 1rem;
+}
+</style>

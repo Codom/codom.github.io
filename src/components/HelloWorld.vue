@@ -12,10 +12,12 @@ defineProps({
     <h1 class="green">{{ msg }}</h1>
     <h3>
         <p>Software Engineer</p>
-        <router-link to="/">Home</router-link> |
-        <router-link to="/Blog">Blog</router-link> |
-        <a href='/resume.pdf'>Resume</a> |
-        <a href='https://github.com/Codom'>Github</a>
+        <nav>
+            <router-link to="/">Home</router-link>
+            <router-link to="/blog">Blog</router-link>
+            <router-link to="/resume">Resume</router-link>
+            <a href='https://github.com/Codom' target="_blank">Github</a>
+        </nav>
     </h3>
   </div>
 </template>
@@ -31,6 +33,25 @@ h1 {
 
 h3 {
   font-size: 1.2rem;
+}
+
+nav {
+  margin-top: 10px;
+}
+
+nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: var(--color-text);
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+nav a.router-link-active {
+    color: #42b883; /* Vue green */
 }
 
 .greetings h1,
