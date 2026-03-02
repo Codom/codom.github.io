@@ -25,90 +25,87 @@ import subprocess
 import os
 import glob
 import json
+import re
 import time
+
 
 def main():
     process_resume()
 
     blog_posts = []
-    glob_path = './blog/*'
-    
-    # Pre-defined dates for existing posts
-    known_dates = {
-        'vue_port': '2023-11-16',
-        'static_website': '2022-09-28'
-    }
+    glob_path = "./blog/*"
 
     for file in glob.glob(glob_path):
         if os.path.isfile(file) and file[-3:] == ".md":
             meta = process_markdown(file)
-            slug = meta['id']
-            if slug in known_dates:
-                meta['date'] = known_dates[slug]
-            else:
-                meta['date'] = time.strftime('%Y-%m-%d', time.localtime(os.path.getmtime(file)))
             blog_posts.append(meta)
 
         if os.path.isfile(file) and file[-4:] == ".png":
-            subprocess.run(["cp", file, "./public/" ])
+            subprocess.run(["cp", file, "./public/"])
 
     # Sort by date descending
-    blog_posts.sort(key=lambda x: x['date'], reverse=True)
-    
-    os.makedirs('./public/blog/', exist_ok=True)
-    with open('public/blog/index.json', 'w') as f:
+    blog_posts.sort(key=lambda x: x["date"], reverse=True)
+
+    os.makedirs("./public/blog/", exist_ok=True)
+    with open("public/blog/index.json", "w") as f:
         json.dump(blog_posts, f, indent=2)
+
 
 def process_markdown(file_path: str):
     with open(file_path, "r", encoding="utf-8") as in_file:
-        lines = in_file.readlines()
-    
+        text = in_file.read()
+
+    # Extract date from <!-- date: YYYY-MM-DD --> comment if present,
+    # otherwise fall back to the file's modification time.
+    date_match = re.search(r"<!--\s*date:\s*(\d{4}-\d{2}-\d{2})\s*-->", text)
+    if date_match:
+        date = date_match.group(1)
+    else:
+        date = time.strftime("%Y-%m-%d", time.localtime(os.path.getmtime(file_path)))
+
+    # Extract title from first markdown heading
     title = "Untitled"
-    if lines and lines[0].startswith('# '):
-        title = lines[0][2:].strip()
-        
-    text = "".join(lines)
-    html = "".join([
-        markdown.markdown(text, extensions=['markdown.extensions.fenced_code']),
-    ])
+    title_match = re.search(r"^#\s+(.+)$", text, re.MULTILINE)
+    if title_match:
+        title = title_match.group(1).strip()
+
+    html = markdown.markdown(text, extensions=["markdown.extensions.fenced_code"])
 
     basename = os.path.basename(file_path)
     slug = basename[:-3]
-    out_page = f"public/blog/{slug}.html" # Get rid of .md and replace with .html
+    out_page = f"public/blog/{slug}.html"
     print(f"outputting to {out_page}")
-    os.makedirs('./public/blog/', exist_ok=True)
+    os.makedirs("./public/blog/", exist_ok=True)
     with open(out_page, "w", encoding="utf-8") as out_file:
         out_file.write(html)
-    
-    return {
-        "id": slug,
-        "title": title,
-        "path": f"/blog/{slug}"
-    }
+
+    return {"id": slug, "title": title, "path": f"/blog/{slug}", "date": date}
+
 
 def process_resume():
     print("Compiling resume...")
     try:
         with open("resume/master_resume_2025.md", "r", encoding="utf-8") as in_file:
             text = in_file.read()
-        
+
         # Strip YAML front matter if present
-        if text.startswith('---'):
+        if text.startswith("---"):
             try:
                 # Find the end of the front matter
-                _, _, rest = text.split('---', 2)
+                _, _, rest = text.split("---", 2)
                 text = rest.strip()
             except ValueError:
                 # If there isn't a second ---, just leave it as is or handle error
                 print("Warning: Malformed YAML front matter in resume.")
-        
-        html = markdown.markdown(text, extensions=['markdown.extensions.fenced_code'])
-        
+
+        html = markdown.markdown(text, extensions=["markdown.extensions.fenced_code"])
+
         with open("public/resume.html", "w", encoding="utf-8") as out_file:
             out_file.write(html)
         print("done")
     except FileNotFoundError:
         print("Error: resume/master_resume_2025.md not found.")
+
 
 if __name__ == "__main__":
     main()

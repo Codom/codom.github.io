@@ -1,3 +1,4 @@
+<!-- date: 2022-09-28 -->
 # Easy way to make your own static website generator
 
 My personal website started out as a kind of joke. I learned how

@@ -9,15 +9,19 @@
 <script>
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import simpleGuitarAmp from '../../public/blog/simple_guitar_amp.html?raw'
-import vuePort from '../../public/blog/vue_port.html?raw'
-import staticWebsite from '../../public/blog/static_website.html?raw'
 
-const posts = {
-    'simple_guitar_amp': simpleGuitarAmp,
-    'vue_port': vuePort,
-    'static_website': staticWebsite
-}
+// Dynamically import all blog HTML files at build time.
+// Adding a new .md file in blog/ is all that's needed — build.py generates
+// the HTML, and this glob picks it up automatically.
+const rawPosts = import.meta.glob('../../public/blog/*.html', { as: 'raw', eager: true })
+
+// Build a slug-keyed map: { 'vue_port': '<html>...' }
+const posts = Object.fromEntries(
+    Object.entries(rawPosts).map(([path, content]) => {
+        const slug = path.split('/').pop().replace('.html', '')
+        return [slug, content]
+    })
+)
 
 export default {
     setup() {

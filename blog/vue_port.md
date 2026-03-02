@@ -1,3 +1,4 @@
+<!-- date: 2023-11-16 -->
 # Vue port
 
 I have spent the past few days porting my website into Vue. I've done this
