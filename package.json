@@ -10,8 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "gsap": "^3.12.5",
-    "three": "^0.158.0",
     "vue": "^3.4.27",
     "vue-router": "^4.2.5"
   },

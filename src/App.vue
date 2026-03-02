@@ -1,6 +1,5 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
-import * as anim from './assets/animations.js'
 </script>
 
 <template>
@@ -13,7 +12,6 @@ import * as anim from './assets/animations.js'
   <main>
      <router-view></router-view>
   </main>
-  <div id = "animContainer"></div>
 </template>
 
 <style scoped>
