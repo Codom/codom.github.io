@@ -6,7 +6,7 @@
  */
 
 // router.js
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 import About from './components/TheWelcome.vue';
 import Blog  from './components/BlogIndex.vue';
 import BlogViewer from './blog/BlogViewer.vue';
@@ -33,7 +33,7 @@ const routes = [
 ]
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHashHistory(),
     routes,
 });
 
