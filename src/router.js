@@ -6,13 +6,12 @@
  */
 
 // router.js
-import { createRouter, createWebHistory } from 'vue-router';
 import About from './components/TheWelcome.vue';
 import Blog  from './components/BlogIndex.vue';
 import BlogViewer from './blog/BlogViewer.vue';
 import ResumeView from './components/ResumeView.vue';
 
-const routes = [
+export const routes = [
     {
         path: '/',
         component: About,
@@ -30,10 +29,3 @@ const routes = [
         component: ResumeView,
     }
 ]
-
-const router = createRouter({
-    history: createWebHistory(),
-    routes,
-});
-
-export default router;

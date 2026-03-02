@@ -1,50 +1,36 @@
 <template>
     <div class="page-wrapper">
-        <div v-if="loading" class="loading">Loading...</div>
-        <div v-if="error" class="error">{{ error }}</div>
-
-        <div v-if="post" class="paper-card">
-            <div v-html="post" class="content markdown-body"></div>
+        <div class="paper-card">
+            <div v-html="postContent" class="content markdown-body"></div>
         </div>
     </div>
 </template>
 
 <script>
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+import simpleGuitarAmp from '../../public/blog/simple_guitar_amp.html?raw'
+import vuePort from '../../public/blog/vue_port.html?raw'
+import staticWebsite from '../../public/blog/static_website.html?raw'
+
+const posts = {
+    'simple_guitar_amp': simpleGuitarAmp,
+    'vue_port': vuePort,
+    'static_website': staticWebsite
+}
+
 export default {
-    data() {
+    setup() {
+        const route = useRoute()
+        
+        const postContent = computed(() => {
+            return posts[route.params.id] || '<p>Post not found</p>'
+        })
+        
         return {
-            loading: false,
-            post: null,
-            error: null,
+            postContent
         }
-    },    // watch the params of the route to fetch the data again
-    created() {
-        this.$watch(
-          () => this.$route.params,
-          () => {
-            this.fetchData()
-          },
-          // fetch the data when the view is created and the data is
-          // already being observed
-          { immediate: true }
-        )
-    },
-    methods: {
-        fetchData() {
-          this.error = this.post = null
-          this.loading = true
-          const data_uri = this.$route.params.id + '.html'
-          fetch(data_uri).then(async (response) => {
-            this.loading = false
-            if (!response.ok) {
-              this.error = await response.error()
-            } else {
-              const html_text = await response.text()
-              this.post = html_text
-            }
-          })
-        },
-    },
+    }
 }
 </script>
 <style>
