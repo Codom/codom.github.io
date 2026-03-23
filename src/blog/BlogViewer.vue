@@ -7,44 +7,42 @@
             <div v-html="post" class="prose prose-zinc prose-lg max-w-none"></div>
         </article>
     </div>
+    <div class="page-wrapper">
+        <div class="paper-card">
+            <div v-html="postContent" class="content markdown-body"></div>
+        </div>
+    </div>
 </template>
 
 <script>
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+
+// Dynamically import all blog HTML files at build time.
+// Adding a new .md file in blog/ is all that's needed — build.py generates
+// the HTML, and this glob picks it up automatically.
+const rawPosts = import.meta.glob('../../public/blog/*.html', { as: 'raw', eager: true })
+
+// Build a slug-keyed map: { 'vue_port': '<html>...' }
+const posts = Object.fromEntries(
+    Object.entries(rawPosts).map(([path, content]) => {
+        const slug = path.split('/').pop().replace('.html', '')
+        return [slug, content]
+    })
+)
+
 export default {
-    data() {
+    setup() {
+        const route = useRoute()
+        
+        const postContent = computed(() => {
+            return posts[route.params.id] || '<p>Post not found</p>'
+        })
+        
         return {
-            loading: false,
-            post: null,
-            error: null,
+            postContent
         }
-    },    // watch the params of the route to fetch the data again
-    created() {
-        this.$watch(
-          () => this.$route.params,
-          () => {
-            this.fetchData()
-          },
-          // fetch the data when the view is created and the data is
-          // already being observed
-          { immediate: true }
-        )
-    },
-    methods: {
-        fetchData() {
-          this.error = this.post = null
-          this.loading = true
-          const data_uri = this.$route.params.id + '.html'
-          fetch(data_uri).then(async (response) => {
-            this.loading = false
-            if (!response.ok) {
-              this.error = await response.error()
-            } else {
-              const html_text = await response.text()
-              this.post = html_text
-            }
-          })
-        },
-    },
+    }
 }
 </script>
 <style scoped>

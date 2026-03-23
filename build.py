@@ -24,24 +24,58 @@ import markdown
 import subprocess
 import os
 import glob
+import json
+import re
+import time
+
 
 def main():
     process_resume()
 
-    glob_path = './blog/*'
+    blog_posts = []
+    glob_path = "./blog/*"
+
     for file in glob.glob(glob_path):
         if os.path.isfile(file) and file[-3:] == ".md":
-            process_markdown(file)
-        if os.path.isfile(file) and file[-4:] == ".png":
-            subprocess.run(["cp", file, "./public/" ])
+            meta = process_markdown(file)
+            blog_posts.append(meta)
 
-def process_markdown(page: str):
-    with open(f"{page}", "r", encoding="utf-8") as in_file:
+        if os.path.isfile(file) and file[-4:] == ".png":
+            subprocess.run(["cp", file, "./public/"])
+
+    # Sort by date descending
+    blog_posts.sort(key=lambda x: x["date"], reverse=True)
+
+    os.makedirs("./public/blog/", exist_ok=True)
+    with open("public/blog/index.json", "w") as f:
+        json.dump(blog_posts, f, indent=2)
+
+
+def process_markdown(file_path: str):
+    with open(file_path, "r", encoding="utf-8") as in_file:
         text = in_file.read()
 
     body_content = markdown.markdown(text, extensions=['markdown.extensions.fenced_code'])
-    
-    page_title = page.split('/')[-1][:-3].replace('_', ' ').title()
+    # Extract date from <!-- date: YYYY-MM-DD --> comment if present,
+    # otherwise fall back to the file's modification time.
+    date_match = re.search(r"<!--\s*date:\s*(\d{4}-\d{2}-\d{2})\s*-->", text)
+    if date_match:
+        date = date_match.group(1)
+    else:
+        date = time.strftime("%Y-%m-%d", time.localtime(os.path.getmtime(file_path)))
+
+    # Extract title from first markdown heading
+    title = "Untitled"
+    title_match = re.search(r"^#\s+(.+)$", text, re.MULTILINE)
+    if title_match:
+        title = title_match.group(1).strip()
+
+    html = markdown.markdown(text, extensions=["markdown.extensions.fenced_code"])
+
+    basename = os.path.basename(file_path)
+    slug = basename[:-3]
+    out_page = f"public/blog/{slug}.html"
+    page_title = file_path.split('/')[-1][:-3].replace('_', ' ').title()
 
     html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -143,20 +177,38 @@ def process_markdown(page: str):
 </body>
 </html>"""
 
-    out_page = f"public/{page[2:-3]}.html"
     print(f"outputting to {out_page}")
-    os.makedirs('./public/blog/', exist_ok=True)
+    os.makedirs("./public/blog/", exist_ok=True)
     with open(out_page, "w", encoding="utf-8") as out_file:
         out_file.write(html)
 
+    return {"id": slug, "title": page_title, "path": f"/blog/{slug}.html", "date": date}
+
+
 def process_resume():
-    latex_env = os.environ | {"TEXINPUTS": ".:./resume:"}
-    print(latex_env)
     print("Compiling resume...")
-    subprocess.run(["pdflatex", "resume/resume.tex"], env=latex_env, check=True)
-    subprocess.run(["mv", "resume.pdf", "public/"])
-    subprocess.run(["rm", "resume.aux", "resume.log", "resume.out"])
-    print("done")
+    try:
+        with open("resume/master_resume_2025.md", "r", encoding="utf-8") as in_file:
+            text = in_file.read()
+
+        # Strip YAML front matter if present
+        if text.startswith("---"):
+            try:
+                # Find the end of the front matter
+                _, _, rest = text.split("---", 2)
+                text = rest.strip()
+            except ValueError:
+                # If there isn't a second ---, just leave it as is or handle error
+                print("Warning: Malformed YAML front matter in resume.")
+
+        html = markdown.markdown(text, extensions=["markdown.extensions.fenced_code"])
+
+        with open("public/resume.html", "w", encoding="utf-8") as out_file:
+            out_file.write(html)
+        print("done")
+    except FileNotFoundError:
+        print("Error: resume/master_resume_2025.md not found.")
+
 
 if __name__ == "__main__":
     main()

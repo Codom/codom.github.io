@@ -48,7 +48,7 @@ const techStack = ['C/C++', 'FreeRTOS', 'Zephyr', 'ARM Cortex', 'U-Boot', 'Linux
             </div>
             
             <div class="mt-8 flex items-center gap-4">
-              <a href="/resume.pdf" class="bg-zinc-900 text-white px-6 py-3 rounded-full font-medium hover:bg-zinc-800 transition-colors flex items-center gap-2">
+              <a href="/resume" class="bg-zinc-900 text-white px-6 py-3 rounded-full font-medium hover:bg-zinc-800 transition-colors flex items-center gap-2">
                 View Resume <ArrowUpRight :size="18" />
               </a>
             </div>

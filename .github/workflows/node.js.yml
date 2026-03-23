@@ -31,15 +31,7 @@ jobs:
       with:
         python-version: '3.11'
         cache: 'pip'
-    - name: Install latex
-      run: sudo apt-get install -y texlive-base texlive-fonts-recommended texlive-fonts-extra texlive-bibtex-extra texlive-formats-extra
-    - run: mkdir public/blog
     - run: pip install -r requirements.txt
-    - run: npm install three
-    - run: npm install vue@^3.3.4
-    - run: npm install vue-router@^4.2.5
-    - run: npm install @vitejs/plugin-vue@^4.4.0
-    - run: npm install vite@^4.4.11
     - run: npm ci
     - run: npm run build --if-present
     - name: Upload artifact
@@ -57,7 +49,7 @@ jobs:
 
     environment:
       name: github-pages
-      url: codom.github.io
+      url: ${{ steps.deployment.outputs.page_url }}
 
     runs-on: ubuntu-latest
 

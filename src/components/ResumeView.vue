@@ -1,9 +1,19 @@
 <template>
-    <div>
-        <pdf src="resume.pdf"></pdf>
+    <div class="page-wrapper">
+        <div class="paper-card">
+            <div v-html="resumeHtml" class="markdown-body"></div>
+        </div>
     </div>
 </template>
 
 <script>
-    import pdf from 'vue-pdf'
+import resumeHtml from '../../public/resume.html?raw'
+
+export default {
+    setup() {
+        return {
+            resumeHtml
+        }
+    }
+}
 </script>

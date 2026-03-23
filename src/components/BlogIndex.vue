@@ -1,16 +1,39 @@
 <script>
 import WelcomeItem from './WelcomeItem.vue'
+import postsData from '../../public/blog/index.json'
+
+export default {
+  components: {
+    WelcomeItem
+  },
+  setup() {
+    return {
+      posts: postsData
+    }
+  }
+}
 </script>
 
 <template>
-  <WelcomeItem>
-    <template #heading>Blog</template>
-
-    <h2>
-        <router-link to="/blog/vue_port">
-            Porting site to vue - 11/16/2023
-        </router-link>
-    </h2>
-    <h2><router-link to="/blog/static_website">Overhaul of static website generation - 09/28/2022</router-link></h2>
-  </WelcomeItem>
+  <div class="page-wrapper">
+      <div class="paper-card">
+          <WelcomeItem>
+            <template #heading>Projects</template>
+            
+            <div v-for="post in posts" :key="post.id" class="blog-entry">
+                <h2>
+                    <router-link :to="post.path">
+                        {{ post.title }} - {{ post.date }}
+                    </router-link>
+                </h2>
+            </div>
+          </WelcomeItem>
+      </div>
+  </div>
 </template>
+
+<style scoped>
+.blog-entry {
+    margin-bottom: 1rem;
+}
+</style>
