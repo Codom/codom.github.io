@@ -7,15 +7,14 @@
 
 // router.js
 import { createRouter, createWebHistory } from 'vue-router';
-import About from './components/TheWelcome.vue';
+import LandingPage from './components/LandingPage.vue';
 import Blog  from './components/BlogIndex.vue';
 import BlogViewer from './blog/BlogViewer.vue';
-import { animateRouteChange } from './assets/animations.js';
 
 const routes = [
     {
         path: '/',
-        component: About,
+        component: LandingPage,
     },
     {
         path: '/blog',
@@ -28,12 +27,8 @@ const routes = [
 ]
 
 const router = createRouter({
-    history: createWebHistory(),
-    routes,
-});
-
-router.afterEach((to, from) => {
-  animateRouteChange(to, from);
+  history: createWebHistory(),
+  routes,
 });
 
 export default router;
