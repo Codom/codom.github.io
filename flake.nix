@@ -1,5 +1,5 @@
 {
-  description = "Node.js development environment";
+  description = "codom.github.io dev env flake";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -13,26 +13,22 @@
       in
       {
         devShells.default = pkgs.mkShell {
-          # The packages you want available in your shell
           buildInputs = with pkgs; [
-            nodejs_22          # Specific Node version
-            nodePackages.npm   # Latest npm
-            nodePackages.typescript-language-server
+            nodejs_22
+            nodePackages.npm
+            git
             python3
             (pkgs.python3.withPackages (python-pkgs: with python-pkgs; [
-              # select Python packages here
               markdown
             ]))
-            git
-            # Add other tools like pkgs.git, pkgs.gh, etc.
           ];
 
           # Environment variables and startup commands
           shellHook = ''
-            echo "Node.js dev environment loaded!"
+            echo "Node.js + python dev environment loaded!"
             echo "Node version: $(node --version)"
             
-            # Optional: Add local node_modules binaries to PATH
+            # Add local node_modules binaries to PATH
             export PATH="$PWD/node_modules/.bin:$PATH"
           '';
         };
