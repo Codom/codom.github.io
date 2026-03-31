@@ -21,7 +21,7 @@ import { useRoute } from 'vue-router'
 // Dynamically import all blog HTML files at build time.
 // Adding a new .md file in blog/ is all that's needed — build.py generates
 // the HTML, and this glob picks it up automatically.
-const rawPosts = import.meta.glob('../../public/blog/*.html', { as: 'raw', eager: true })
+const rawPosts = import.meta.glob('../data/blog/*.html', { as: 'raw', eager: true })
 
 // Build a slug-keyed map: { 'vue_port': '<html>...' }
 const posts = Object.fromEntries(

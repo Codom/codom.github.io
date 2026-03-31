@@ -1,6 +1,6 @@
 <script>
 import WelcomeItem from './WelcomeItem.vue'
-import postsData from '../../public/blog/index.json'
+import postsData from '../data/blog/index.json'
 
 export default {
   components: {

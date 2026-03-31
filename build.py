@@ -46,8 +46,8 @@ def main():
     # Sort by date descending
     blog_posts.sort(key=lambda x: x["date"], reverse=True)
 
-    os.makedirs("./public/blog/", exist_ok=True)
-    with open("public/blog/index.json", "w") as f:
+    os.makedirs("./src/data/blog/", exist_ok=True)
+    with open("src/data/blog/index.json", "w") as f:
         json.dump(blog_posts, f, indent=2)
 
 
@@ -55,7 +55,9 @@ def process_markdown(file_path: str):
     with open(file_path, "r", encoding="utf-8") as in_file:
         text = in_file.read()
 
-    body_content = markdown.markdown(text, extensions=['markdown.extensions.fenced_code'])
+    body_content = markdown.markdown(
+        text, extensions=["markdown.extensions.fenced_code"]
+    )
     # Extract date from <!-- date: YYYY-MM-DD --> comment if present,
     # otherwise fall back to the file's modification time.
     date_match = re.search(r"<!--\s*date:\s*(\d{4}-\d{2}-\d{2})\s*-->", text)
@@ -74,8 +76,8 @@ def process_markdown(file_path: str):
 
     basename = os.path.basename(file_path)
     slug = basename[:-3]
-    out_page = f"public/blog/{slug}.html"
-    page_title = file_path.split('/')[-1][:-3].replace('_', ' ').title()
+    out_page = f"src/data/blog/{slug}.html"
+    page_title = file_path.split("/")[-1][:-3].replace("_", " ").title()
 
     html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -178,7 +180,7 @@ def process_markdown(file_path: str):
 </html>"""
 
     print(f"outputting to {out_page}")
-    os.makedirs("./public/blog/", exist_ok=True)
+    os.makedirs("./src/data/blog/", exist_ok=True)
     with open(out_page, "w", encoding="utf-8") as out_file:
         out_file.write(html)
 
@@ -203,7 +205,7 @@ def process_resume():
 
         html = markdown.markdown(text, extensions=["markdown.extensions.fenced_code"])
 
-        with open("public/resume.html", "w", encoding="utf-8") as out_file:
+        with open("src/data/resume.html", "w", encoding="utf-8") as out_file:
             out_file.write(html)
         print("done")
     except FileNotFoundError:

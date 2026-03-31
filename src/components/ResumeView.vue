@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import resumeHtml from '../../public/resume.html?raw'
+import resumeHtml from '../data/resume.html?raw'
 
 export default {
     setup() {

@@ -26,7 +26,8 @@ coverage
 *.njsproj
 *.sln
 *.sw?
-public/blog/
+src/data/blog/
+src/data/resume.html
 public/*.png
 public/*.pdf
 

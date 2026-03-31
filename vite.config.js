@@ -7,7 +7,7 @@ import vue from '@vitejs/plugin-vue'
 // Read blog posts for SSG
 const getBlogRoutes = () => {
   try {
-    const data = fs.readFileSync('./public/blog/index.json', 'utf8')
+    const data = fs.readFileSync('./src/data/blog/index.json', 'utf8')
     const posts = JSON.parse(data)
     return posts.map(post => post.path)
   } catch (e) {
