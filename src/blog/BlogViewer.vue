@@ -1,16 +1,8 @@
 <template>
-    <div class="post min-h-screen bg-[#fafafa] text-zinc-900">
-        <div v-if="loading" class="text-zinc-500 py-12">Loading...</div>
-        <div v-if="error" class="text-red-500 py-12">{{ error }}</div>
-
-        <article v-if="post" class="max-w-3xl mx-auto px-6 py-16">
-            <div v-html="post" class="prose prose-zinc prose-lg max-w-none"></div>
+    <div class="min-h-screen bg-[#fafafa] text-zinc-900">
+        <article class="max-w-3xl mx-auto px-6 py-16">
+            <div v-html="postContent" class="prose prose-zinc prose-lg max-w-none"></div>
         </article>
-    </div>
-    <div class="page-wrapper">
-        <div class="paper-card">
-            <div v-html="postContent" class="content markdown-body"></div>
-        </div>
     </div>
 </template>
 

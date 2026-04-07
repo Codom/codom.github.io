@@ -100,7 +100,7 @@ const techStack = ['C/C++', 'FreeRTOS', 'Zephyr', 'ARM Cortex', 'U-Boot', 'Linux
 
         <div class="flex flex-col">
           <!-- Article 1 -->
-          <a href="/blog/static_website.html" class="group py-8 border-t border-zinc-200 hover:bg-white hover:px-6 -mx-6 px-6 transition-all duration-300 rounded-2xl">
+          <a href="/blog/static_website" class="group py-8 border-t border-zinc-200 hover:bg-white hover:px-6 -mx-6 px-6 transition-all duration-300 rounded-2xl">
             <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 mb-3">
               <h3 class="text-2xl md:text-3xl font-serif font-medium text-zinc-900 group-hover:text-blue-600 transition-colors">
                 Easy way to make your own static website generator
@@ -113,7 +113,7 @@ const techStack = ['C/C++', 'FreeRTOS', 'Zephyr', 'ARM Cortex', 'U-Boot', 'Linux
           </a>
 
           <!-- Article 2 -->
-          <a href="/blog/vue_port.html" class="group py-8 border-t border-zinc-200 hover:bg-white hover:px-6 -mx-6 px-6 transition-all duration-300 rounded-2xl border-b">
+          <a href="/blog/vue_port" class="group py-8 border-t border-zinc-200 hover:bg-white hover:px-6 -mx-6 px-6 transition-all duration-300 rounded-2xl border-b">
             <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 mb-3">
               <h3 class="text-2xl md:text-3xl font-serif font-medium text-zinc-900 group-hover:text-blue-600 transition-colors">
                 Porting site to Vue

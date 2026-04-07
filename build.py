@@ -184,7 +184,7 @@ def process_markdown(file_path: str):
     with open(out_page, "w", encoding="utf-8") as out_file:
         out_file.write(html)
 
-    return {"id": slug, "title": page_title, "path": f"/blog/{slug}.html", "date": date}
+    return {"id": slug, "title": page_title, "path": f"/blog/{slug}", "date": date}
 
 
 def process_resume():
