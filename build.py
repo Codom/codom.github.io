@@ -193,20 +193,46 @@ def process_resume():
         with open("resume/master_resume_2025.md", "r", encoding="utf-8") as in_file:
             text = in_file.read()
 
-        # Strip YAML front matter if present
+        metadata = {}
+        content = text
+
         if text.startswith("---"):
             try:
-                # Find the end of the front matter
-                _, _, rest = text.split("---", 2)
-                text = rest.strip()
-            except ValueError:
-                # If there isn't a second ---, just leave it as is or handle error
-                print("Warning: Malformed YAML front matter in resume.")
+                first_sep = text.find("---", 3)
+                if first_sep != -1:
+                    yaml_text = text[3:first_sep].strip()
+                    content = text[first_sep + 3:].strip()
 
-        html = markdown.markdown(text, extensions=["markdown.extensions.fenced_code"])
+                    import yaml
+                    metadata = yaml.safe_load(yaml_text) or {}
+            except Exception as e:
+                print(f"Warning: Could not parse YAML front matter: {e}")
+
+        html = markdown.markdown(content, extensions=["markdown.extensions.fenced_code"])
+
+        name = metadata.get("name", "")
+        subheading = metadata.get("subheading", "")
+        left_column = metadata.get("left-column", [])
+        right_column = metadata.get("right-column", [])
+
+        left_html = "".join(f"<p>{markdown.markdown(item).replace('<p>', '').replace('</p>', '')}</p>" for item in left_column)
+        right_html = "".join(f"<p>{markdown.markdown(item).replace('<p>', '').replace('</p>', '')}</p>" for item in right_column)
+
+        header_html = f"""<header class="resume-header">
+            <div class="name-section">
+                <h1>{name}</h1>
+                <p class="subheading">{subheading}</p>
+            </div>
+            <div class="contact-section">
+                <div class="left-column">{left_html}</div>
+                <div class="right-column">{right_html}</div>
+            </div>
+        </header>"""
+
+        full_html = header_html + html
 
         with open("src/data/resume.html", "w", encoding="utf-8") as out_file:
-            out_file.write(html)
+            out_file.write(full_html)
         print("done")
     except FileNotFoundError:
         print("Error: resume/master_resume_2025.md not found.")

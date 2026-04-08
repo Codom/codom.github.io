@@ -51,6 +51,44 @@ button {
     border-radius: 4px;
 }
 
+.resume-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 3px solid var(--color-border);
+}
+
+.resume-header .name-section h1 {
+    font-size: 2.5rem;
+    margin: 0 0 0.5rem 0;
+    border: none;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+.resume-header .subheading {
+    font-size: 1.1rem;
+    color: var(--color-text-light);
+    margin: 0;
+}
+
+.resume-header .contact-section {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.0rem;
+}
+
+.resume-header .left-column p,
+.resume-header .right-column p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--color-text);
+}
+
 .loading, .error {
     color: var(--color-text);
     text-align: center;
@@ -61,8 +99,9 @@ button {
 .markdown-body h1 {
     font-size: 2.5rem;
     border-bottom: 2px solid var(--color-border);
-    padding-bottom: 0.5rem;
-    margin-bottom: 1.5rem;
+    padding-bottom: 0.2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     color: var(--color-heading);
@@ -71,8 +110,8 @@ button {
 .markdown-body h2 {
     font-size: 1.5rem;
     color: var(--color-heading);
-    margin-top: 1.5rem;
-    margin-bottom: 0.8rem;
+    margin-top: 1rem;
+    margin-bottom: 0.6rem;
     border-bottom: 1px solid var(--color-border);
     padding-bottom: 0.2rem;
     text-transform: uppercase;
@@ -80,8 +119,8 @@ button {
 
 .markdown-body h3 {
     font-size: 1.2rem;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
+    margin-top: 0.7rem;
+    margin-bottom: 0.4rem;
     font-weight: bold;
     color: var(--color-heading);
 }
@@ -95,6 +134,7 @@ button {
 .markdown-body ul {
     margin-bottom: 1rem;
     padding-left: 1.5rem;
+    list-style-type: disc !important;
 }
 
 .markdown-body li {

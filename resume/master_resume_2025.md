@@ -8,22 +8,27 @@ left-column:
   - "Email: christopher.r.odom@gmail.com"
   - "GitHub: [Codom](https://github.com/Codom)"
 name: Christopher Odom
+subheading: US Citizen, Boston MA
 right-column:
   - "phone: 781-475-3804"
   - "website: [codom.github.io](https://codom.github.io)"
 ---
 
 # Experience
-## **Data Labeler for Software** (part time) | 2024 - Present
-Aided in the finetuning of proprietary language models by creating and labeling highly diverse synthetic coding datasets.
+## **Data Labeler for Software** | Present
 
-Designed project scenarios ranging from fundamental web development and data analysis to niche domains, including
-**compiler development** and **graphics programming**, significantly broadening model coverage.
+Designed custom project scenarios and validated auto generated output from llms
+in order to facilitate better AI model runs. Project scenarios included:
+
+ - Catching race conditions and other subtle multithreading bugs in **C/C++**
+ - Validating code changes in **Dockerized Environments**
+ - Validating Chain of Thought reasoning steps in **agentic harnesses** such
+   as **claude code, gemini cli**, and other similar tools
 
 ## **Embedded Engineer at Stealth Startup** | 2024 - 2025
 Lead R&D efforts and developed contract procurement portfolio
 
- - Created demo **Linux Drivers** for off the shelf sensors
+ - Created demo **Linux Drivers** using **C** for off the shelf sensors
  - Prototyped and built **real-time embedded applications** using
    the **Zephyr OS**
  - Developed a custom in-house **embedded linux** distribution using
@@ -32,11 +37,11 @@ Lead R&D efforts and developed contract procurement portfolio
    for a next-generation real-time sensor fusion platform
 
 ## **Red Hat Internship** | Summer 2020
-Contributed to the modernization of the **Ceph dashboard API**, focusing on improving API design, performance, and scalability standards.
+ - Using **Python** and **CherryPy**, aided in the modernization of the **Ceph dashboard API**.
 
 ## **Draper Internship** | 2018 - 2019
-Engineered and implemented **complex internal diagnostic tooling** for a custom platform as part of a rigorous **FAA Compliance CRS contract**.
-* Integrated tooling with **VxWorks** and **offline data collection** systems to facilitate rigorous testing and quality assurance protocols.
+ - Engineered and implemented internal diagnostic tooling using **C, Python and VxWorks** for a custom platform as part of a rigorous **FAA Compliance CRS contract**.
+ - Integrated hardware tests written in **PowerPC assembly** with **offline data collection** systems to facilitate rigorous testing and quality assurance protocols.
 
 # Projects
 ## **Amp Simulator VST Plugin** | 2023
@@ -56,11 +61,6 @@ Designed and implemented a custom, robust **allocator interface** in a **single 
 * Allows for **trivial dependency injection** of memory management behavior.
 * Provides implementations for libc, a **custom arena allocator**, and a fixed linear allocator.
 * Optionally integrates with **ASAN (AddressSanitizer)** by utilizing memory poisoning functions for superior debugging of use-after-free bugs.
-
-## **Godot KanBan Board** | 2021
-Built a multi-project KanBan board utilizing the Godot scene system.
-
-* Implemented serialization to disk via JSON for persistent project state management.
 
 ## **Vulkan Tutorial Implementation** | 2021
 Repository: [Codom/Vulkan-Tutorial](https://github.com/Codom/Vulkan-Tutorial)
