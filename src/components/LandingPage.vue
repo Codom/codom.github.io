@@ -100,15 +100,15 @@ const techStack = ['C/C++', 'FreeRTOS', 'Zephyr', 'ARM Cortex', 'U-Boot', 'Linux
 
         <div class="flex flex-col">
           <!-- Article 1 -->
-          <a href="/blog/static_website" class="group py-8 border-t border-zinc-200 hover:bg-white hover:px-6 -mx-6 px-6 transition-all duration-300 rounded-2xl">
+          <a href="/blog/simple_guitar_amp" class="group py-8 border-t border-zinc-200 hover:bg-white hover:px-6 -mx-6 px-6 transition-all duration-300 rounded-2xl">
             <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 mb-3">
               <h3 class="text-2xl md:text-3xl font-serif font-medium text-zinc-900 group-hover:text-blue-600 transition-colors">
-                Easy way to make your own static website generator
+                Building a guitar amp plugin in Zig with CLAP
               </h3>
-              <span class="text-zinc-400 font-mono text-sm shrink-0">Sep 28, 2022</span>
+              <span class="text-zinc-400 font-mono text-sm shrink-0">Jan 15, 2026</span>
             </div>
             <p class="text-zinc-500 text-lg max-w-3xl leading-relaxed">
-              My personal website started out as a kind of joke. Building a minimal static site generator using Python and markdown.
+              A deep dive into building a DSP audio plugin from scratch. Covering the signal chain, biquad filters, and synchronizing parameters between the audio and main threads.
             </p>
           </a>
 
