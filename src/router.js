@@ -6,11 +6,13 @@
  */
 
 // router.js
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory, createMemoryHistory } from 'vue-router';
 import LandingPage from './components/LandingPage.vue';
 import Blog  from './components/BlogIndex.vue';
 import BlogViewer from './blog/BlogViewer.vue';
 import ResumeView from './components/ResumeView.vue';
+
+const isClient = typeof window !== 'undefined'
 
 export const routes = [
     {
@@ -31,7 +33,7 @@ export const routes = [
     }
 ]
 const router = createRouter({
-  history: createWebHistory(),
+  history: isClient ? createWebHistory() : createMemoryHistory(),
   routes,
 });
 
