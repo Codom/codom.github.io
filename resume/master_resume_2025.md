@@ -29,7 +29,7 @@ in order to facilitate better AI model runs. Project scenarios included:
 ## **Embedded Engineer at Stealth Startup** | 2024 - 2025
 Lead R&D efforts and developed contract procurement portfolio
 
- - Created demo **Linux Drivers** using **C** for off the shelf sensors
+ - Created demo **Linux Drivers** using **C** and **Git** for off the shelf sensors
  - Prototyped and built **real-time embedded applications** using
    the **Zephyr OS**
  - Developed a custom in-house **embedded linux** distribution using
