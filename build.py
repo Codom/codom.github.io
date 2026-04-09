@@ -192,7 +192,7 @@ def process_markdown(file_path: str):
 def process_resume():
     print("Compiling resume...")
     try:
-        with open("resume/master_resume_2025.md", "r", encoding="utf-8") as in_file:
+        with open("./resume/master_resume_2025.md", "r", encoding="utf-8") as in_file:
             text = in_file.read()
 
         metadata = {}
