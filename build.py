@@ -199,7 +199,7 @@ def process_resume():
             "--template", "resume/template.tex",
             "--lua-filter", "resume/render_metadata.lua",
             "--pdf-engine=xelatex",
-            "-o", "resume.pdf"
+            "-o", "public/resume.pdf"
         ], check=True)
 
         # HTML generation

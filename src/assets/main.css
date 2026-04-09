@@ -49,6 +49,28 @@ button {
     max-width: 850px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.5);
     border-radius: 4px;
+    position: relative;
+}
+
+.pdf-link {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.pdf-button {
+    background-color: #18181b;
+    color: white;
+    padding: 0.4rem 0.75rem;
+    border-radius: 0.375rem;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.875rem;
+    transition: background-color 0.2s;
+}
+
+.pdf-button:hover {
+    background-color: #3b82f6;
 }
 
 .resume-header {
