@@ -192,52 +192,28 @@ def process_markdown(file_path: str):
 def process_resume():
     print("Compiling resume...")
     try:
-        with open("./resume/master_resume_2025.md", "r", encoding="utf-8") as in_file:
-            text = in_file.read()
+        # PDF generation
+        print("Generating PDF...")
+        subprocess.run([
+            "pandoc", "resume/master_resume_2025.md",
+            "--template", "resume/template.tex",
+            "--lua-filter", "resume/render_metadata.lua",
+            "--pdf-engine=xelatex",
+            "-o", "resume.pdf"
+        ], check=True)
 
-        metadata = {}
-        content = text
-
-        if text.startswith("---"):
-            try:
-                first_sep = text.find("---", 3)
-                if first_sep != -1:
-                    yaml_text = text[3:first_sep].strip()
-                    content = text[first_sep + 3:].strip()
-
-                    import yaml
-                    metadata = yaml.safe_load(yaml_text) or {}
-            except Exception as e:
-                print(f"Warning: Could not parse YAML front matter: {e}")
-
-        html = markdown.markdown(content, extensions=["markdown.extensions.fenced_code"])
-
-        name = metadata.get("name", "")
-        subheading = metadata.get("subheading", "")
-        left_column = metadata.get("left-column", [])
-        right_column = metadata.get("right-column", [])
-
-        left_html = "".join(f"<p>{markdown.markdown(item).replace('<p>', '').replace('</p>', '')}</p>" for item in left_column)
-        right_html = "".join(f"<p>{markdown.markdown(item).replace('<p>', '').replace('</p>', '')}</p>" for item in right_column)
-
-        header_html = f"""<header class="resume-header">
-            <div class="name-section">
-                <h1>{name}</h1>
-                <p class="subheading">{subheading}</p>
-            </div>
-            <div class="contact-section">
-                <div class="left-column">{left_html}</div>
-                <div class="right-column">{right_html}</div>
-            </div>
-        </header>"""
-
-        full_html = header_html + html
-
+        # HTML generation
+        print("Generating HTML...")
         os.makedirs("src/data", exist_ok=True)
-        with open("src/data/resume.html", "w", encoding="utf-8") as out_file:
-            out_file.write(full_html)
+        subprocess.run([
+            "pandoc", "resume/master_resume_2025.md",
+            "--template", "resume/template.html",
+            "--lua-filter", "resume/render_metadata.lua",
+            "-t", "html",
+            "-o", "src/data/resume.html"
+        ], check=True)
         print("done")
-    except FileNotFoundError as e:
+    except Exception as e:
         print(f"Error: {e}")
 
 

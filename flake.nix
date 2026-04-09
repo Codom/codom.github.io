@@ -18,9 +18,10 @@
             nodePackages.npm
             git
             python3
+            pandoc
+            texlive.combined.scheme-medium
             (pkgs.python3.withPackages (python-pkgs: with python-pkgs; [
               markdown
-              pyyaml
             ]))
           ];
 
