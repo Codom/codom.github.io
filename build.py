@@ -233,11 +233,12 @@ def process_resume():
 
         full_html = header_html + html
 
+        os.makedirs("src/data", exist_ok=True)
         with open("src/data/resume.html", "w", encoding="utf-8") as out_file:
             out_file.write(full_html)
         print("done")
-    except FileNotFoundError:
-        print("Error: resume/master_resume_2025.md not found.")
+    except FileNotFoundError as e:
+        print(f"Error: {e}")
 
 
 if __name__ == "__main__":
