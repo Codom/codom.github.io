@@ -54,11 +54,11 @@ const techStack = ['C/C++', 'FreeRTOS', 'Zephyr', 'ARM Cortex', 'U-Boot', 'Linux
             </div>
           </div>
 
-          <!-- Remote/Location Card -->
+          <!-- Location Card -->
           <div class="bg-white rounded-3xl p-8 border border-zinc-200 shadow-sm flex flex-col justify-center relative overflow-hidden group">
             <MapPin :size="24" class="text-zinc-400 mb-4" />
-            <h3 class="text-xl font-bold text-zinc-900 mb-1">100% Remote</h3>
-            <p class="text-zinc-500 text-sm">Based in Boston, MA (EST). Seeking distributed team opportunities.</p>
+            <h3 class="text-xl font-bold text-zinc-900 mb-1">Open to Work</h3>
+            <p class="text-zinc-500 text-sm">Based in Boston, MA (EST). Open to hybrid and remote opportunities.</p>
             
             <!-- Decorative background element -->
             <div class="absolute -right-4 -bottom-4 opacity-5 group-hover:scale-110 transition-transform duration-500">
