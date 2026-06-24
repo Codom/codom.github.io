@@ -8,7 +8,7 @@ left-column:
   - "Email: christopher.r.odom@gmail.com"
   - "GitHub: [Codom](https://github.com/Codom)"
 name: Christopher Odom
-subheading: US Citizen, Boston MA
+subheading: Boston, MA → Orlando, FL (September 2026)
 right-column:
   - "phone: 781-475-3804"
   - "website: [codom.github.io](https://codom.github.io)"
