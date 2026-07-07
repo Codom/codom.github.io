@@ -10,7 +10,7 @@ import {
   Coffee
 } from 'lucide-vue-next';
 
-const techStack = ['C/C++', 'FreeRTOS', 'Zephyr', 'ARM Cortex', 'U-Boot', 'Linux'];
+const techStack = ['C/C++', 'Python', 'JavaScript', 'Linux', 'Docker', 'REST APIs'];
 </script>
 
 <template>
@@ -40,10 +40,10 @@ const techStack = ['C/C++', 'FreeRTOS', 'Zephyr', 'ARM Cortex', 'U-Boot', 'Linux
                 Open to opportunities
               </div>
               <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-zinc-900 mb-4 leading-tight">
-                Embedded systems engineer building <br class="hidden md:block"/> reliable firmware.
+                Software engineer focused on systems, infrastructure, and developer tooling.
               </h1>
               <p class="text-lg text-zinc-500 max-w-lg leading-relaxed">
-                Hi, I'm Christopher. I specialize in C/C++, RTOS, hardware integration, and creating robust software for resource-constrained devices.
+                Hi, I'm Christopher. I work across C/C++, Python, and JavaScript — building low-level systems, developer tooling, containerized services, and web APIs.
               </p>
             </div>
             
